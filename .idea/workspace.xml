@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105540a7-de90-4601-8cf1-eec8785a32c3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/model/punet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils1/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils1/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/punet.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/punet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,11 +70,22 @@
       <workItem from="1714023070630" duration="3978000" />
       <workItem from="1714238507957" duration="1452000" />
       <workItem from="1714397792418" duration="700000" />
-      <workItem from="1714548225447" duration="3613000" />
+      <workItem from="1714548225447" duration="6349000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
