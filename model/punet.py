@@ -19,6 +19,9 @@ class PUNet(nn.Module):
         self.radius = [.05, .1, .2, .3]
         self.nsamples = [32, 32, 32, 32]
 
+        #   Hierarchical feature learning
+
+
 
 if __name__ == '__main__':
     net = PUNet(num_point=1024, use_normal=False, use_bn=False, use_res=False)
