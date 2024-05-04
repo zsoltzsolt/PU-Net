@@ -48,3 +48,7 @@ class CustomLoss(nn.Module):
 
     def forward(self, pred, target, pcd_radius):
         return self.get_emd_loss(pred, target, pcd_radius)*100, self.alpha*self.get_repulsion_loss(pred, target, pcd_radius)
+
+
+def get_optimizer(model: nn.Module):
+    return torch.optim.AdamW(model.parameters(), lr=5e-4, weight_decay=1e-5)
