@@ -1,4 +1,4 @@
-from utils1 import data
+from model.utils1 import data
 def main():
     input1, gt, data_radius, name = data.load_patch_data()
 

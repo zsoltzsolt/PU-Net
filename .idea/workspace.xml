@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105540a7-de90-4601-8cf1-eec8785a32c3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/model/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/utils1/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/utils1/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils1/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/utils1/data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,21 +36,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;model&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/zsolt/PycharmProjects/PU-NET/h5_data&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "model",
+    "last_opened_file_path": "/home/zsolt/PycharmProjects/PU-NET/model",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/model" />
       <recent name="$PROJECT_DIR$/h5_data" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -77,7 +83,7 @@
       <workItem from="1714724885000" duration="780000" />
       <workItem from="1714746621870" duration="315000" />
       <workItem from="1714806692521" duration="5097000" />
-      <workItem from="1714819328817" duration="1679000" />
+      <workItem from="1714819328817" duration="2614000" />
     </task>
     <servers />
   </component>
