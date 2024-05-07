@@ -98,47 +98,37 @@ class CustomLoss(nn.Module):
 
 
 def get_optimizer(model: nn.Module):
-    return torch.optim.AdamW(model.parameters(), lr=5e-4, weight_decay=1e-5)
+    return torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-5)
 
 
 if __name__ == '__main__':
 
-    # Add Comet exepriment
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    # Add Comet experiment
     comet_ml.init()
     exp = comet_ml.Experiment(api_key="8Yhdr0XpIZUXnxp0QftpWlGbL", project_name="testare")
-    experiment="E5"
+    experiment = "E4"
     parameters = {'batch_size': 4, 'learning_rate': 1e-4, 'alpha': 1}
     exp.log_parameters(parameters)
 
-    train_dataset = PUNET_Datset(points=1024,split='train')
+    train_dataset = PUNET_Datset(points=1024, split='train')
     print("Dataset size: ", len(train_dataset))
-
-    if len(train_dataset) == 0:
-        print("Train dataset is empty!")
-        exit()
 
     train_loader = DataLoader(dataset=train_dataset, batch_size=4)
 
-    if len(train_loader) == 0:
-        print("Train loader is empty!")
-        exit()
-
-    model = PUNet().cuda()
+    model = PUNet().to(device)
 
     optimizer = get_optimizer(model)
-    loss_fn = CustomLoss(alpha=1).cuda()
-    print("We are going to train")
+    loss_fn = CustomLoss(alpha=1).to(device)
     model.train()
 
-
-    data = np.loadtxt('cow.xyz')[:,:3]
+    data = np.loadtxt('cow.xyz')[:, :3]
     exp.log_points_3d(
         scene_name="Point Cloud",
         points=data.tolist(),
         step=0,
     )
-
-
 
     for epoch in range(10):
         loss_list = []
@@ -151,13 +141,13 @@ if __name__ == '__main__':
                 optimizer.zero_grad()
                 input_data, gt_data, radius_data = batch
 
-                input_data = input_data.float().cuda()
-                gt_data = gt_data.float().cuda()
+                input_data = input_data.float().to(device)
+                gt_data = gt_data.float().to(device)
                 gt_data = gt_data[..., :3].contiguous()
-                radius_data = radius_data.float().cuda()
+                radius_data = radius_data.float().to(device)
 
-                preds = model(input_data)
-                loss1, rep_loss = loss_fn(preds, gt_data, radius_data)
+                predictions = model(input_data)
+                loss1, rep_loss = loss_fn(predictions, gt_data, radius_data)
                 loss = loss1 + rep_loss
 
                 loss.backward()
@@ -167,24 +157,23 @@ if __name__ == '__main__':
                 emd_loss_list.append(loss1.item())
                 rep_loss_list.append(rep_loss.item())
 
-
         except Exception as e:
             print("Error occurred:", e)
             exit()
 
-        output = model(torch.tensor([data, data, data, data], dtype=torch.float32, device='cuda'))
+        output = model(torch.tensor([data, data, data, data], dtype=torch.float32).to(device))
         output_list = output[0].cpu().detach().numpy().tolist()
 
         exp.log_points_3d(
-            scene_name="Point Cloud",
+            scene_name="Cow",
             points=output_list,
-            step=epoch+1,
+            step=epoch + 1,
         )
 
         with open(f"saved_models/{experiment}_{epoch}.pkl", "wb") as f:
             pickle.dump(model, f)
         exp.log_metrics({'loss': np.mean(loss_list), 'weighted emd loss': np.mean(emd_loss_list),
                          'repulsion loss': np.mean(rep_loss_list)}, step=epoch)
-        print(' -- epoch {}, loss {:.4f}, weighted emd loss {:.4f}, repulsion loss {:.4f}, lr {}.'.format(
-            epoch, np.mean(loss_list), np.mean(emd_loss_list), np.mean(rep_loss_list), \
-            optimizer.state_dict()['param_groups'][0]['lr']))
+        print(
+            f"Epoch {epoch} loss: {np.mean(loss_list)}, emd loss: {np.mean(emd_loss_list)}, repulsion loss: {np.mean(rep_loss_list)}")
+
