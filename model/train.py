@@ -12,6 +12,7 @@ from tqdm import tqdm
 import comet_ml
 from comet_ml import Experiment
 import pickle
+from rich.progress import track
 
 
 def nonuniform_sampling(num, sample_num):
@@ -86,7 +87,7 @@ class CustomLoss(nn.Module):
         grouped_points = pointnet2_utils.grouping_operation(pred, idx)
         grouped_points = grouped_points - pred.unsqueeze(-1)
         dist2 = torch.sum(grouped_points ** 2, dim=1)
-        dist2 = torch.max(dist2, torch.tensor(self.eps).cuda())
+        dist2 = torch.max(dist2, torch.tensor(self.eps).to(torch.device('cuda')))
         dist = torch.sqrt(dist2)
         weight = torch.exp(-dist2 / self.h ** 2)
         uniform_loss = torch.mean((self.radius - dist) * weight)
@@ -98,7 +99,7 @@ class CustomLoss(nn.Module):
 
 
 def get_optimizer(model: nn.Module):
-    return torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-5)
+    return torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-5)
 
 
 if __name__ == '__main__':
@@ -108,8 +109,8 @@ if __name__ == '__main__':
     # Add Comet experiment
     comet_ml.init()
     exp = comet_ml.Experiment(api_key="8Yhdr0XpIZUXnxp0QftpWlGbL", project_name="testare")
-    experiment = "E4"
-    parameters = {'batch_size': 4, 'learning_rate': 1e-4, 'alpha': 1}
+    experiment = "E6"
+    parameters = {'batch_size': 4, 'learning_rate': 3e-4, 'alpha': 5}
     exp.log_parameters(parameters)
 
     train_dataset = PUNET_Datset(points=1024, split='train')
@@ -120,7 +121,7 @@ if __name__ == '__main__':
     model = PUNet().to(device)
 
     optimizer = get_optimizer(model)
-    loss_fn = CustomLoss(alpha=1).to(device)
+    loss_fn = CustomLoss(alpha=5).to(device)
     model.train()
 
     data = np.loadtxt('cow.xyz')[:, :3]
@@ -137,7 +138,7 @@ if __name__ == '__main__':
         print("Epoch:", epoch)
 
         try:
-            for batch in tqdm(train_loader):
+            for batch in track(train_loader):
                 optimizer.zero_grad()
                 input_data, gt_data, radius_data = batch
 
