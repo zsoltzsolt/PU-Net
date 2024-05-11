@@ -109,8 +109,8 @@ if __name__ == '__main__':
     # Add Comet experiment
     comet_ml.init()
     exp = comet_ml.Experiment(api_key="8Yhdr0XpIZUXnxp0QftpWlGbL", project_name="testare")
-    experiment = "E6"
-    parameters = {'batch_size': 4, 'learning_rate': 3e-4, 'alpha': 5}
+    experiment = "E9"
+    parameters = {'batch_size': 4, 'learning_rate': 1e-3, 'alpha': 0.5}
     exp.log_parameters(parameters)
 
     train_dataset = PUNET_Datset(points=1024, split='train')
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     model = PUNet().to(device)
 
     optimizer = get_optimizer(model)
-    loss_fn = CustomLoss(alpha=5).to(device)
+    loss_fn = CustomLoss(alpha=0.5).to(device)
     model.train()
 
     data = np.loadtxt('cow.xyz')[:, :3]
@@ -131,7 +131,7 @@ if __name__ == '__main__':
         step=0,
     )
 
-    for epoch in range(10):
+    for epoch in range(100):
         loss_list = []
         emd_loss_list = []
         rep_loss_list = []
