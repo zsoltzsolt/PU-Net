@@ -1,0 +1,9 @@
+comet-ml==3.42.0
+h5py==3.11.0
+KNN-CUDA @ https://github.com/unlimblue/KNN_CUDA/releases/download/0.2/KNN_CUDA-0.2-py3-none-any.whl#sha256=809a43da2eed950c65ba15e355e8cdbf975b6a948dced1f02414f26aba586cd0
+matplotlib==3.8.4
+networkx==3.3
+numpy==1.26.4
+open3d==0.18.0
+rich==13.7.1
+tqdm==4.66.2
