@@ -119,7 +119,7 @@ if __name__ == '__main__':
     loss_fn = CustomLoss(alpha=0.5).to(device)
     model.train()
 
-    data = np.loadtxt('uploads/cow.xyz')[:, :3]
+    data = np.loadtxt('./model/uploads/cow.xyz')[:, :3]
 
     for epoch in range(100):
         loss_list = []

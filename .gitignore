@@ -1,3 +1,4 @@
-model/h5_data/Patches_noHole_and_collected.h5
+h5_data/Patches_noHole_and_collected.h5
 *.xyz
 *.pkl
+*.idea
