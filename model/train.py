@@ -39,7 +39,7 @@ class PUNET_Datset(torch.utils.data.Dataset):
         self.data_radius = data_radius
         self.object_name = object_name
 
-        with open('./{}_list.txt'.format(split), 'r') as f:
+        with open('./data/{}_list.txt'.format(split), 'r') as f:
             split_choice = [int(x) for x in f]
         self.ground_truth = self.ground_truth[split_choice, ...]
         self.input_ = self.input_[split_choice, ...]
@@ -119,7 +119,7 @@ if __name__ == '__main__':
     loss_fn = CustomLoss(alpha=0.5).to(device)
     model.train()
 
-    data = np.loadtxt('cow.xyz')[:, :3]
+    data = np.loadtxt('uploads/cow.xyz')[:, :3]
 
     for epoch in range(100):
         loss_list = []
