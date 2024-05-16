@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="105540a7-de90-4601-8cf1-eec8785a32c3" name="Changes" comment="" />
+=======
+    <list default="true" id="105540a7-de90-4601-8cf1-eec8785a32c3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/model/test_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/train_list.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/PU_Net_Presentation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/model/PU_Net_Presentation.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/streamlit/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/evaluate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/streamlit/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/train.py" afterDir="false" />
+    </list>
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +29,17 @@
         <option value="Jupyter Notebook" />
         <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -30,6 +54,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.train.executor": "Run",
@@ -42,6 +67,21 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.train.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;model&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/zsolt/PycharmProjects/PU-NET&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+>>>>>>> Stashed changes
   }
 }]]></component>
   <component name="RecentsManager">
@@ -118,7 +158,19 @@
       <workItem from="1714897666111" duration="5305000" />
       <workItem from="1714980722203" duration="9525000" />
       <workItem from="1715005637470" duration="3919000" />
-      <workItem from="1715100723517" duration="64000" />
+      <workItem from="1715100723517" duration="1825000" />
+      <workItem from="1715104603890" duration="1964000" />
+      <workItem from="1715143672812" duration="936000" />
+      <workItem from="1715174579046" duration="1619000" />
+      <workItem from="1715234552655" duration="3252000" />
+      <workItem from="1715365848590" duration="3010000" />
+      <workItem from="1715444420585" duration="3459000" />
+      <workItem from="1715508436783" duration="1247000" />
+      <workItem from="1715706330608" duration="400000" />
+      <workItem from="1715796569491" duration="1195000" />
+      <workItem from="1715797788329" duration="235000" />
+      <workItem from="1715854550917" duration="143000" />
+      <workItem from="1715855314085" duration="4764000" />
     </task>
     <servers />
   </component>

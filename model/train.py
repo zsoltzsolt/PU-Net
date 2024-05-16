@@ -8,10 +8,6 @@ from auction_match import auction_match
 from utils1.utils import knn_point
 from utils1.data import load_patch_data
 from punet import PUNet
-from tqdm import tqdm
-import comet_ml
-from comet_ml import Experiment
-import pickle
 from rich.progress import track
 
 
@@ -37,10 +33,16 @@ class PUNET_Datset(torch.utils.data.Dataset):
 
         input_, ground_truth, data_radius, object_name = load_patch_data(h5_filename, skip_rate, points, random_input,
                                                                          norm)
+
         self.input_ = input_
         self.ground_truth = ground_truth
         self.data_radius = data_radius
         self.object_name = object_name
+
+        with open('./{}_list.txt'.format(split), 'r') as f:
+            split_choice = [int(x) for x in f]
+        self.ground_truth = self.ground_truth[split_choice, ...]
+        self.input_ = self.input_[split_choice, ...]
 
     def __len__(self):
         return len(self.input_)
@@ -101,35 +103,23 @@ class CustomLoss(nn.Module):
 def get_optimizer(model: nn.Module):
     return torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-5)
 
-
 if __name__ == '__main__':
-
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    # Add Comet experiment
-    comet_ml.init()
-    exp = comet_ml.Experiment(api_key="8Yhdr0XpIZUXnxp0QftpWlGbL", project_name="testare")
-    experiment = "E9"
-    parameters = {'batch_size': 4, 'learning_rate': 1e-3, 'alpha': 0.5}
-    exp.log_parameters(parameters)
-
     train_dataset = PUNET_Datset(points=1024, split='train')
-    print("Dataset size: ", len(train_dataset))
+    test_dataset = PUNET_Datset(points=1024, split='test')
+    print("Train Dataset size: ", len(train_dataset))
+    print("Test Dataset size: ", len(test_dataset))
 
-    train_loader = DataLoader(dataset=train_dataset, batch_size=4)
+    train_loader = DataLoader(dataset=train_dataset, batch_size=1, shuffle=True)
+    test_loader = DataLoader(dataset=test_dataset, batch_size=1, shuffle=False)
 
     model = PUNet().to(device)
-
     optimizer = get_optimizer(model)
     loss_fn = CustomLoss(alpha=0.5).to(device)
     model.train()
 
     data = np.loadtxt('cow.xyz')[:, :3]
-    exp.log_points_3d(
-        scene_name="Point Cloud",
-        points=data.tolist(),
-        step=0,
-    )
 
     for epoch in range(100):
         loss_list = []
@@ -138,6 +128,7 @@ if __name__ == '__main__':
         print("Epoch:", epoch)
 
         try:
+            model.train()
             for batch in track(train_loader):
                 optimizer.zero_grad()
                 input_data, gt_data, radius_data = batch
@@ -162,19 +153,7 @@ if __name__ == '__main__':
             print("Error occurred:", e)
             exit()
 
-        output = model(torch.tensor([data, data, data, data], dtype=torch.float32).to(device))
+        output = model(torch.tensor([data, data], dtype=torch.float32).to(device))
         output_list = output[0].cpu().detach().numpy().tolist()
 
-        exp.log_points_3d(
-            scene_name="Cow",
-            points=output_list,
-            step=epoch + 1,
-        )
-
-        with open(f"saved_models/{experiment}_{epoch}.pkl", "wb") as f:
-            pickle.dump(model, f)
-        exp.log_metrics({'loss': np.mean(loss_list), 'weighted emd loss': np.mean(emd_loss_list),
-                         'repulsion loss': np.mean(rep_loss_list)}, step=epoch)
-        print(
-            f"Epoch {epoch} loss: {np.mean(loss_list)}, emd loss: {np.mean(emd_loss_list)}, repulsion loss: {np.mean(rep_loss_list)}")
-
+        print(f"Epoch {epoch} loss: {np.mean(loss_list)}, emd loss: {np.mean(emd_loss_list)}")
